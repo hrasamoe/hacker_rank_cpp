@@ -8,7 +8,7 @@ public:
     HotelRoom(int bedrooms, int bathrooms) 
     : bedrooms_(bedrooms), bathrooms_(bathrooms) {}
     
-    int get_price() {
+    virtual int get_price() {
         return 50*bedrooms_ + 100*bathrooms_;
     }
 private:
@@ -21,7 +21,7 @@ public:
     HotelApartment(int bedrooms, int bathrooms) 
     : HotelRoom(bedrooms, bathrooms) {}
 
-    int get_price() {
+    int get_price() override {
         return HotelRoom::get_price() + 100;
     }
 };
