@@ -21,19 +21,40 @@ int main()
         getline(cin, line);
         stringstream ss(line);
         ss >> tag;
-        if (tag.find("/") != string::npos)
+        if (tag.find("/") == string::npos)
         {
-            tag = tag.substr(0, tag.length() - 1);
+           
+            if (tag.back() == '>')
+            {
+                tag = tag.substr(1, tag.length() - 2);
+            }
+            else
+                tag = tag.substr(1, tag.length() - 1);
             stack_tag.push_back(tag);
         }
+        else 
+            stack_tag.pop_back();
         while (ss >> props)
         {
-            
+            string path;
             if (props == "=")
             {
                 ss >> value;
-                value.substr(1, value.length() - 2);
-                dict[prev] = value;
+                if (value.back() == '>')
+                {
+                    value.pop_back();
+                    value = value.substr(1, value.length() - 2);
+                }
+                else
+                    value = value.substr(1, value.length() - 2);
+                for (size_t k = 0; k < stack_tag.size(); k++)
+                {
+                    if (k > 0)
+                        path += '.';
+                    path += stack_tag[k];
+                }
+                path += "~" + prev;
+                dict[path] = value;
             }
             prev = props;
         }
