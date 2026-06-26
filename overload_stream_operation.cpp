@@ -16,6 +16,14 @@ private:
     string last_name_;
 };
 
+ostream& operator<<(ostream& os, const Person p)
+{
+    p.get_first_name();
+    p.get_last_name();
+    os << "first_name=" << p.get_first_name() << ",last_name=" << p.get_last_name();
+    return os;
+}
+
 int main() {
     string first_name, last_name, event;
     cin >> first_name >> last_name >> event;
