@@ -6,18 +6,29 @@ using namespace std;
 
 class Message {
 public: 
-    Message() {}
-    const string& get_text() {
-        
+    Message(const string& conten, const int id): content_(conten), id_(id) {
     }
+    const string& get_text() const{
+        return content_;
+    }
+    bool operator<(const Message& other) const
+    {
+        return id_ < other.id_;
+    }
+private:
+    string content_;
+    int id_;
 };
 
 class MessageFactory {
 public:
     MessageFactory() {}
     Message create_message(const string& text) {
-        
+      return  Message(text, current_index_++);
     }
+
+private:
+    int current_index_ = 0;
 };
 
 class Recipient {
@@ -43,7 +54,6 @@ private:
 class Network {
 public:
     static void send_messages(vector<Message> messages, Recipient& recipient) {
-    // simulates the unpredictable network, where sent messages might arrive in unspecified order
         random_shuffle(messages.begin(), messages.end());         
         for (auto msg : messages) {
             recipient.receive(msg);
