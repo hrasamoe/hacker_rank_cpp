@@ -61,7 +61,33 @@ class SpellJournal {
 string SpellJournal::journal = "";
 
 void counterspell(Spell *spell) {
-
+    if (Fireball* fb  = dynamic_cast<Fireball*>(spell))
+        fb->revealFirepower();
+    else if (Frostbite* fb  = dynamic_cast<Frostbite*>(spell))
+        fb->revealFrostpower();
+    else if (Thunderstorm* fb  = dynamic_cast<Thunderstorm*>(spell))
+        fb->revealThunderpower();
+    else if (Waterbolt* fb  = dynamic_cast<Waterbolt*>(spell))
+        fb->revealWaterpower();
+    else
+    {
+        string s1 = spell->revealScrollName();
+        string s2 = SpellJournal::read();
+        int n = s1.length();
+        int m = s2.length();
+        vector<vector <int>> matrice(n + 1, vector<int>(m + 1, 0));
+        for (int i = 1; i <= n; i++ )
+        {
+            for (int j = 1; j <= m; j++)
+            {
+                if (s1[i - 1] == s2[j -1])
+                    matrice[i][j] = 1 + matrice[i - 1][j - 1];
+                else
+                    matrice[i][j] = max(matrice[i][j - 1], matrice[i - 1][j]);
+            }
+        }
+        cout << matrice[n][m] << endl;
+    }
 }
 
 class Wizard {
