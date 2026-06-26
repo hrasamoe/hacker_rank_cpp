@@ -60,4 +60,16 @@ int main()
         }
         
     }
+    for (int n = 0; n < number_request; n++)
+    {
+        string request;
+        scanf("%s", &request);
+        if (dict.find(request) != dict.end())
+        {
+            cout << dict[request] << endl;
+        } else {
+            cout << "Not Found!" << endl;
+        }
+
+    }
 }
