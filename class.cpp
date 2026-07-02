@@ -1,11 +1,55 @@
 #include <iostream>
 #include <sstream>
+#include <string>
 using namespace std;
 
-/*
-Enter code for class Student here.
-Read statement for specification.
-*/
+class Student {
+    private:
+    string first_name;
+    string last_name;
+    int age;
+    int standard;
+
+    public:
+    void set_age(int a)
+    {
+        age = a;
+    }
+    void set_first_name(string data)
+    {
+        first_name = data;
+    }
+    void set_last_name(string data)
+    {
+        last_name = data;
+    }
+    void set_standard(int b)
+    {
+        standard = b;
+    }
+    int get_age()
+    {
+        return age;
+    }
+    string get_first_name()
+    {
+        return first_name;
+    }
+    string get_last_name()
+    {
+        return last_name;
+    }
+    int get_standard()
+    {
+        return standard;
+    }
+    string to_string()
+    {
+        stringstream ss;
+        ss << age << "," << first_name << "," << last_name << "," << standard << endl;
+        return ss.str();
+    }
+};
 
 int main() {
     int age, standard;
