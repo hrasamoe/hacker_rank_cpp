@@ -3,8 +3,18 @@
 #include <iostream>
 using namespace std;
 
+
 vector<int> parseInts(string str) {
-	// Complete this function
+    vector<int> result;
+    char comma;
+    int i;
+    stringstream ss(str);
+    while (ss >> i)
+    {
+        ss >> comma;
+        result.push_back(i);
+    }
+    return result;
 }
 
 int main() {
@@ -15,5 +25,5 @@ int main() {
         cout << integers[i] << "\n";
     }
     
-    return 0;G
+    return 0;
 }
