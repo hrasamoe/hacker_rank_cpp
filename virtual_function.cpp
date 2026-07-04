@@ -5,6 +5,65 @@
 #include <algorithm>
 using namespace std;
 
+
+class Person{
+    private:
+        string name;
+        int age;
+
+    public:
+        virtual void getdata(){
+            cin >> name;
+            cin >> age;
+        }
+        virtual void putdata()
+        {
+            cout << name  << " " << age << " ";
+        }
+        virtual ~Person() {}
+};
+
+class Professor: public Person {
+    private:
+        static int id;
+        int publication = 0;
+
+    public:
+        void getdata() override{
+            Person::getdata();
+            cin >> publication;
+        }
+        void putdata() override {
+            Person::putdata();
+            id++;
+            cout << publication << " " << id << endl;
+        }
+};
+int Professor::id = 0;
+
+class Student: public Person {
+    private:
+        static int id; 
+        int marks[6];
+        int sums  = 0;
+
+    public:
+        void getdata() override{
+            Person::getdata();
+            for (int i = 0; i < 6; i++)
+            {
+                cin >> marks[i];
+                sums += marks[i];
+            }
+        }
+        void putdata() override {
+            Person::putdata();
+            id++;
+            cout << sums << " " << id << endl;
+        }
+};
+int Student::id = 0;
+
 int main(){
 
     int n, val;
