@@ -1,27 +1,60 @@
 #include<bits/stdc++.h>
-
 using namespace std;
-//Implement the class Box  
-//l,b,h are integers representing the dimensions of the box
 
-// The class should have the following functions : 
+class Box{
+    private: 
+        int l, b, h;
+    public:
+        Box(int length = 0, int breadth = 0, int height = 0)
+        {
+            l = length;
+            b = breadth;
+            h = height;
+        }
 
-// Constructors: 
-// Box();
-// Box(int,int,int);
-// Box(Box);
+        Box(const Box& B)
+        {
+            l = B.l;
+            b = B.b;
+            h = B.h;
+        }
 
+        int getLength() const
+        {
+            return l;
+        }
+        int getBreadth() const
+        {
+            return b;
+        }
+        int getHeight() const
+        {
+            return h;
+        }
 
-// int getLength(); // Return box's length
-// int getBreadth (); // Return box's breadth
-// int getHeight ();  //Return box's height
-// long long CalculateVolume(); // Return the volume of the box
+        long long CalculateVolume() const
+        {
+            return (long long)l * b * h;
+        }
 
-//Overload operator < as specified
-//bool operator<(Box& b)
+        bool operator<(const Box& other) const
+        {
+            if (l < other.l) 
+                return true;
+            if ((b < other.b) && (l == other.l)) 
+                return true;
+            if ((h < other.h) && (b == other.b) && (l == other.l)) 
+                return true;
+            
+            return false;
+        }
+};
 
-//Overload operator << as specified
-//ostream& operator<<(ostream& out, Box& B)
+ostream& operator<<(ostream& os, const Box& p)
+{
+    os << p.getLength() << " " << p.getBreadth() << " " << p.getHeight();
+    return os;
+}
 
 
 void check2()
