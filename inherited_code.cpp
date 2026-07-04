@@ -5,7 +5,21 @@
 using namespace std;
 
 /* Define the exception here */
+class BadLengthException: public exception{
 
+	private:
+		int n;
+		string error_message;
+	public:
+		BadLengthException(const int j) : n(j) {
+			error_message = to_string(n);
+		};	
+
+	const char* what() const noexcept {
+		return error_message.c_str();
+	}
+
+};
 
 bool checkUsername(string username) {
 	bool isValid = true;
