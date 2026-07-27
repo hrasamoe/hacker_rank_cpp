@@ -17,7 +17,6 @@ struct Node{
 };
 
 class Cache{
-   
    protected: 
    map<int,Node*> mp; //map the key to the node in the linked list
    int cp;  //capacity
@@ -25,7 +24,6 @@ class Cache{
    Node* head; // double linked list head pointer
    virtual void set(int, int) = 0; //set function
    virtual int get(int) = 0; //get function
-
 };
 
 class LRUCache: public Cache{
@@ -37,7 +35,7 @@ class LRUCache: public Cache{
             if (node->prev != NULL)
                 node->prev->next = node->next;
             if (node->next != NULL)
-                node->next->prev = node->prev
+                node->next->prev = node->prev;
             if (node == tail)
                 tail = node->prev;
             node->prev = NULL;
@@ -45,25 +43,68 @@ class LRUCache: public Cache{
             head->prev = node;
             head = node;
         }
+
     public:
         LRUCache(int capacity)
         {
             cp = capacity;
             head = NULL;
             tail = NULL;
-        } 
+        }
+
         int get(int key) override
         {
-           auto find = mp.find(key);
-            if (auto != mp.end())
+            auto find = mp.find(key);
+            if (find != mp.end())
             {
-                Node* swap = find->second;
-                moveToHead(swap);
+                Node* node = find->second;
+                moveToHead(node);
                 return find->second->value;
             }
             return -1;
         }
-}
+
+        void set(int key, int value) override
+        {
+            auto find = mp.find(key);
+            if (find != mp.end())
+            {
+                Node* node = find->second;
+                node->value = value;
+                moveToHead(node);
+            }
+            else
+            {
+                if (mp.size() == cp && tail != NULL)
+                {
+                    mp.erase(tail->key);
+                    Node* temp = tail;
+                    if (tail->prev != NULL)
+                    {
+                        tail = tail->prev;
+                        tail->next = NULL;
+                    }
+                    else
+                    {
+                        head = tail = NULL;
+                    }                    
+                    delete temp;
+                }
+                Node* newNode = new Node(key, value);
+                if (head == NULL)
+                {
+                    head = tail = newNode;
+                }
+                else
+                {
+                    newNode->next = head;
+                    head->prev = newNode;
+                    head = newNode;
+                }
+                mp[key] = newNode;
+            }
+        }
+};
 
 int main() {
    int n, capacity,i;
