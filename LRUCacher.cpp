@@ -45,7 +45,24 @@ class LRUCache: public Cache{
             head->prev = node;
             head = node;
         }
-
+    public:
+        LRUCache(int capacity)
+        {
+            cp = capacity;
+            head = NULL;
+            tail = NULL;
+        } 
+        int get(int key) override
+        {
+           auto find = mp.find(key);
+            if (auto != mp.end())
+            {
+                Node* swap = find->second;
+                moveToHead(swap);
+                return find->second->value;
+            }
+            return -1;
+        }
 }
 
 int main() {
