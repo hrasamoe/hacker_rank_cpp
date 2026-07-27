@@ -28,6 +28,26 @@ class Cache{
 
 };
 
+class LRUCache: public Cache{
+    protected:
+        void moveToHead(Node* node)
+        {
+            if (node == head)
+                return;
+            if (node->prev != NULL)
+                node->prev->next = node->next;
+            if (node->next != NULL)
+                node->next->prev = node->prev
+            if (node == tail)
+                tail = node->prev;
+            node->prev = NULL;
+            node->next = head;
+            head->prev = node;
+            head = node;
+        }
+
+}
+
 int main() {
    int n, capacity,i;
    cin >> n >> capacity;
