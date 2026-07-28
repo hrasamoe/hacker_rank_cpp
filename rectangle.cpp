@@ -2,6 +2,28 @@
 
 using namespace std;
 
+class Rectangle{
+     public:
+    int h,w;
+    
+   
+   void read_input(){
+        cin>>w>>h;
+    }
+    
+    void display(){
+        cout<<w<<" "<<h<<endl;
+    }
+
+};
+
+class RectangleArea:public Rectangle{
+    public:
+    void display(){
+        cout<<w*h<<endl;
+    }
+};
+
 int main()
 {
     /*
