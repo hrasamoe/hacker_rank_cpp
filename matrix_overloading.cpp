@@ -23,6 +23,7 @@ class Matrix
             result.a[i][j] = this->a[i][j] + otherMatrix.a[i][j];
          }
       }
+      return result;
    }
 
 };
