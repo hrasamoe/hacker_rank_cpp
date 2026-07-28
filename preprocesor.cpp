@@ -2,6 +2,11 @@
 #include <vector>
 using namespace std;
 
+#define INF 1000000000
+#define toStr(x) #x
+#define io(v) cin >> v
+#define foreach(v, i) for (int i = 0; i < v.size(); i++)
+#define FUNCTION(name, op) void name(int& a, int b) { if (b op a) a = b; }
 #if !defined toStr || !defined io || !defined FUNCTION || !defined INF
 #error Missing preprocessor definitions
 #endif 
