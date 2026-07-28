@@ -7,6 +7,23 @@ using namespace std;
 
 class Matrix
 {
+   public:
+      vector<vector<int>> a;
+   Matrix operator+(const Matrix& otherMatrix)
+   {
+      Matrix result;
+      int d1 = a.size();
+      int d2 = a[0].size();
+      result.a.resize(d1, vector<int>(d2));
+
+      for (int i = 0; i < d1; i++)
+      {
+         for (int j = 0; j < d2; j++)
+         {
+            result.a[i][j] = this->a[i][j] + otherMatrix.a[i][j];
+         }
+      }
+   }
 
 };
 
